@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nedräkning till GTA VI — 19 november 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky-top: #0d0620;
+    --sky-mid: #2b0f4e;
+    --pink: #ff3e8a;
+    --hot: #ff6ec7;
+    --orange: #ff9a3e;
+    --violet: #7b4dff;
+    --cream: #fff4e0;
+    --grid: rgba(255, 62, 138, .55);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--sky-top);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  .scene {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+      var(--sky-top) 0%,
+      var(--sky-mid) 34%,
+      #6a1b6e 52%,
+      #c62a7c 66%,
+      var(--orange) 78%,
+      #1a0b33 78.2%,
+      #12071f 100%);
+  }
+
+  /* ---------- Stars ---------- */
+  .stars {
+    position: absolute;
+    inset: 0 0 45% 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: .7;
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: .15; }
+    50% { opacity: .8; }
+  }
+
+  /* ---------- The sun ---------- */
+  .sun-wrap {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -58%);
+    width: min(72vmin, 560px);
+    height: min(72vmin, 560px);
+    pointer-events: none;
+  }
+  .sun {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffe259 0%, var(--orange) 35%, var(--pink) 70%, #b3178f 100%);
+    -webkit-mask: linear-gradient(#000 0 0) top/100% 55% no-repeat,
+      repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
+    mask: linear-gradient(#000 0 0) top/100% 55% no-repeat,
+      repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
+    filter: drop-shadow(0 0 60px rgba(255, 110, 199, .55))
+            drop-shadow(0 0 140px rgba(255, 62, 138, .35));
+    animation: sunPulse 6s ease-in-out infinite;
+  }
+  @keyframes sunPulse {
+    0%, 100% { filter: drop-shadow(0 0 60px rgba(255,110,199,.55)) drop-shadow(0 0 140px rgba(255,62,138,.35)); }
+    50% { filter: drop-shadow(0 0 80px rgba(255,110,199,.75)) drop-shadow(0 0 180px rgba(255,62,138,.5)); }
+  }
+
+  /* ---------- Grid floor ---------- */
+  .floor {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 300vw;
+    height: 24%;
+    transform: translateX(-50%);
+    perspective: 260px;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .floor::before {
+    content: "";
+    position: absolute;
+    inset: -100% 0 0 0;
+    background:
+      repeating-linear-gradient(90deg, var(--grid) 0 2px, transparent 2px 90px),
+      repeating-linear-gradient(0deg, var(--grid) 0 2px, transparent 2px 70px);
+    transform: rotateX(62deg);
+    transform-origin: bottom;
+    animation: gridScroll 2.6s linear infinite;
+  }
+  @keyframes gridScroll {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 0 0, 0 70px; }
+  }
+  .floor::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #12071f 0%, transparent 40%);
+  }
+
+  /* ---------- Palms ---------- */
+  .palm {
+    position: absolute;
+    bottom: 17%;
+    width: min(34vmin, 300px);
+    height: auto;
+    fill: #0a0416;
+    filter: drop-shadow(0 0 18px rgba(13, 6, 32, .9));
+    pointer-events: none;
+    z-index: 2;
+  }
+  .palm.left  { left: -4vmin;  transform: scaleX(-1) rotate(-3deg); }
+  .palm.right { right: -4vmin; transform: rotate(-4deg); }
+  .palm .fronds { transform-origin: 78% 22%; animation: sway 7s ease-in-out infinite; }
+  .palm.right .fronds { animation-delay: -3.5s; }
+  @keyframes sway {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(2.4deg); }
+  }
+
+  /* ---------- Content ---------- */
+  .content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 4rem 1.25rem 6rem;
+    width: 100%;
+    max-width: 980px;
+  }
+
+  .eyebrow {
+    font-size: clamp(.7rem, 1.6vw, .85rem);
+    letter-spacing: .45em;
+    text-transform: uppercase;
+    color: var(--hot);
+    text-shadow: 0 0 12px rgba(255, 110, 199, .8);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3.6rem, 15vw, 9.5rem);
+    line-height: .92;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    background: linear-gradient(180deg, #fff 8%, var(--hot) 45%, var(--pink) 72%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 24px rgba(255, 62, 138, .45))
+            drop-shadow(0 4px 0 rgba(123, 77, 255, .5));
+  }
+
+  .tagline {
+    margin-top: .9rem;
+    font-size: clamp(.9rem, 2.2vw, 1.1rem);
+    color: rgba(255, 244, 224, .82);
+    letter-spacing: .06em;
+  }
+
+  /* ---------- Countdown ---------- */
+  .countdown {
+    display: flex;
+    justify-content: center;
+    gap: clamp(.5rem, 2.4vw, 1.4rem);
+    margin: clamp(2rem, 5vh, 3.2rem) 0 1.6rem;
+    flex-wrap: wrap;
+  }
+  .unit {
+    min-width: clamp(72px, 18vw, 150px);
+    padding: clamp(.8rem, 2.4vw, 1.4rem) clamp(.4rem, 1.6vw, 1rem);
+    border: 1px solid rgba(255, 110, 199, .45);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(13, 6, 32, .72), rgba(43, 15, 78, .55));
+    backdrop-filter: blur(6px);
+    box-shadow:
+      0 0 0 1px rgba(123, 77, 255, .15),
+      0 0 32px rgba(255, 62, 138, .18),
+      inset 0 1px 0 rgba(255, 255, 255, .12);
+  }
+  .unit .num {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.4rem, 8.5vw, 5rem);
+    line-height: 1;
+    color: var(--cream);
+    text-shadow:
+      0 0 14px rgba(255, 110, 199, .85),
+      0 0 42px rgba(255, 62, 138, .5);
+    font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .unit .num.tick { animation: pop .5s ease; }
+  @keyframes pop {
+    0% { transform: translateY(-6px); opacity: .2; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .unit .label {
+    display: block;
+    margin-top: .5rem;
+    font-size: clamp(.62rem, 1.6vw, .8rem);
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--hot);
+  }
+
+  /* ---------- Progress ---------- */
+  .progress {
+    max-width: 640px;
+    margin: 2.4rem auto 0;
+  }
+  .progress .meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: .72rem;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: rgba(255, 244, 224, .6);
+    margin-bottom: .5rem;
+  }
+  .bar {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 110, 199, .3);
+    overflow: hidden;
+  }
+  .bar .fill {
+    height: 100%;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--violet), var(--pink), var(--orange));
+    box-shadow: 0 0 18px rgba(255, 62, 138, .7);
+    transition: width 1.2s ease;
+  }
+  .progress .pct {
+    margin-top: .55rem;
+    font-size: .8rem;
+    color: var(--hot);
+    letter-spacing: .12em;
+  }
+
+  /* ---------- Milestones ---------- */
+  .bar { position: relative; overflow: visible; }
+  .bar .fill { position: relative; z-index: 1; }
+  .milestone {
+    position: absolute;
+    top: 50%;
+    width: 14px; height: 14px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: #2b0f4e;
+    border: 2px solid rgba(255, 110, 199, .4);
+    z-index: 2;
+  }
+  .milestone.passed {
+    background: var(--pink);
+    border-color: var(--cream);
+    box-shadow: 0 0 14px rgba(255, 62, 138, .9);
+  }
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .4rem 1.4rem;
+    margin-top: 1.1rem;
+  }
+  .legend .item {
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+    font-size: .68rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255, 244, 224, .45);
+  }
+  .legend .item .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 110, 199, .3);
+    flex: none;
+  }
+  .legend .item.passed { color: rgba(255, 244, 224, .9); }
+  .legend .item.passed .dot {
+    background: var(--pink);
+    box-shadow: 0 0 8px rgba(255, 62, 138, .9);
+  }
+
+  .release-line {
+    margin-top: 2.6rem;
+    font-size: clamp(.8rem, 2vw, .95rem);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: rgba(255, 244, 224, .75);
+  }
+  .release-line strong {
+    color: var(--cream);
+    text-shadow: 0 0 12px rgba(255, 110, 199, .8);
+  }
+
+  .footnote {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 1rem 1.25rem 1.6rem;
+    font-size: .68rem;
+    letter-spacing: .08em;
+    color: rgba(255, 244, 224, .35);
+    background: #12071f;
+  }
+
+  /* ---------- Scanlines ---------- */
+  .scanlines {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: repeating-linear-gradient(180deg, rgba(0,0,0,.14) 0 2px, transparent 2px 4px);
+    mix-blend-mode: multiply;
+    opacity: .5;
+  }
+
+  /* ---------- Celebration state ---------- */
+  .released .countdown, .released .progress { display: none; }
+  .released-msg { display: none; }
+  .released .released-msg {
+    display: block;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2rem, 8vw, 4.5rem);
+    text-transform: uppercase;
+    color: var(--cream);
+    text-shadow: 0 0 30px rgba(255, 110, 199, .9);
+    margin: 3rem 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sun, .floor::before, .palm .fronds, .star, .unit .num.tick { animation: none !important; }
+    .bar .fill { transition: none; }
+  }
+
+  :focus-visible { outline: 2px solid var(--hot); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main class="scene" id="scene">
+  <div class="stars" id="stars" aria-hidden="true"></div>
+
+  <div class="sun-wrap" aria-hidden="true"><div class="sun"></div></div>
+
+  <svg class="palm left" viewBox="0 0 200 300" aria-hidden="true">
+    <g class="fronds">
+      <path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/>
+      <path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/>
+      <path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/>
+      <path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/>
+      <path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/>
+      <path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/>
+      <circle cx="150" cy="76" r="7"/>
+      <circle cx="162" cy="82" r="6"/>
+    </g>
+    <path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/>
+  </svg>
+
+  <svg class="palm right" viewBox="0 0 200 300" aria-hidden="true">
+    <g class="fronds">
+      <path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/>
+      <path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/>
+      <path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/>
+      <path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/>
+      <path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/>
+      <path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/>
+      <circle cx="150" cy="76" r="7"/>
+      <circle cx="162" cy="82" r="6"/>
+    </g>
+    <path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/>
+  </svg>
+
+  <div class="floor" aria-hidden="true"></div>
+
+  <div class="content">
+    <p class="eyebrow">Vice City väntar</p>
+    <h1>GTA&nbsp;VI</h1>
+    <p class="tagline">Nedräkningen till decenniets största spelsläpp</p>
+
+    <div class="countdown" role="timer" aria-live="polite" aria-label="Tid kvar till releasen">
+      <div class="unit"><span class="num" id="d">--</span><span class="label">Dagar</span></div>
+      <div class="unit"><span class="num" id="h">--</span><span class="label">Timmar</span></div>
+      <div class="unit"><span class="num" id="m">--</span><span class="label">Minuter</span></div>
+      <div class="unit"><span class="num" id="s">--</span><span class="label">Sekunder</span></div>
+    </div>
+
+    <p class="released-msg">Det har släppts.<br>Vi ses i Leonida.</p>
+
+    <div class="progress">
+      <div class="meta"><span>Trailer 1 · 5 dec 2023</span><span>Release · 19 nov 2026</span></div>
+      <div class="bar" id="bar"><div class="fill" id="fill"></div></div>
+      <p class="pct" id="pct"></p>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <p class="release-line">Släpps <strong>19 november 2026</strong> · PS5 &amp; Xbox Series X|S</p>
+  </div>
+
+  <div class="scanlines" aria-hidden="true"></div>
+</main>
+
+<footer class="footnote">
+  Inofficiell fansida. Grand Theft Auto är ett varumärke som tillhör Take-Two Interactive. Ingen koppling till Rockstar Games.
+</footer>
+
+<script>
+  // Release: 19 november 2026, lokal midnatt
+  const RELEASE = new Date(2026, 10, 19, 0, 0, 0);
+  const START = new Date(2023, 11, 5); // Trailer 1
+
+  const $ = id => document.getElementById(id);
+  const els = { d: $('d'), h: $('h'), m: $('m'), s: $('s') };
+  const prev = {};
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function setNum(key, val) {
+    if (prev[key] === val) return;
+    prev[key] = val;
+    const el = els[key];
+    el.textContent = val;
+    el.classList.remove('tick');
+    void el.offsetWidth;
+    el.classList.add('tick');
+  }
+
+  function update() {
+    const now = new Date();
+    let diff = RELEASE - now;
+
+    if (diff <= 0) {
+      document.getElementById('scene').classList.add('released');
+      return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    diff -= days * 86400000;
+    const hours = Math.floor(diff / 3600000);
+    diff -= hours * 3600000;
+    const mins = Math.floor(diff / 60000);
+    diff -= mins * 60000;
+    const secs = Math.floor(diff / 1000);
+
+    setNum('d', String(days));
+    setNum('h', pad(hours));
+    setNum('m', pad(mins));
+    setNum('s', pad(secs));
+  }
+
+  const MILESTONES = [
+    { date: new Date(2023, 11, 5),  label: 'Trailer 1 · 5 dec 2023' },
+    { date: new Date(2025, 4, 6),   label: 'Trailer 2 · 6 maj 2025' },
+    { date: new Date(2026, 5, 25),  label: 'Förhandsbokning · 25 jun 2026' },
+    { date: RELEASE,                label: 'Release · 19 nov 2026' }
+  ];
+
+  function renderMilestones() {
+    const total = RELEASE - START;
+    const now = Date.now();
+    const bar = $('bar');
+    const legend = $('legend');
+    bar.querySelectorAll('.milestone').forEach(el => el.remove());
+    legend.innerHTML = '';
+
+    MILESTONES.forEach(ms => {
+      const pos = ((ms.date - START) / total) * 100;
+      const passed = now >= ms.date;
+
+      const dot = document.createElement('div');
+      dot.className = 'milestone' + (passed ? ' passed' : '');
+      dot.style.left = pos + '%';
+      dot.title = ms.label;
+      bar.appendChild(dot);
+
+      const item = document.createElement('div');
+      item.className = 'item' + (passed ? ' passed' : '');
+      item.innerHTML = '<span class="dot"></span>' + ms.label;
+      legend.appendChild(item);
+    });
+  }
+
+  function updateProgress() {
+    const total = RELEASE - START;
+    const done = Math.min(Math.max(Date.now() - START, 0), total);
+    const pct = (done / total) * 100;
+    $('fill').style.width = pct.toFixed(2) + '%';
+    $('pct').textContent = pct.toFixed(1) + ' % av väntan avklarad sedan Trailer 1';
+  }
+
+  // Stars
+  (function makeStars() {
+    const wrap = $('stars');
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = (Math.random() * 3) + 's';
+      s.style.transform = 'scale(' + (0.5 + Math.random() * 1.4) + ')';
+      wrap.appendChild(s);
+    }
+  })();
+
+  update();
+  updateProgress();
+  renderMilestones();
+  setInterval(update, 1000);
+  setInterval(() => { updateProgress(); renderMilestones(); }, 60000);
+</script>
+</body>
+</html>
