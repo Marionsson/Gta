@@ -365,6 +365,17 @@
     color: var(--cream);
     text-shadow: 0 0 10px rgba(255, 110, 199, .4);
   }
+  .timeline a.what {
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(255, 110, 199, .5);
+    width: fit-content;
+    transition: color .2s ease, border-color .2s ease, text-shadow .2s ease;
+  }
+  .timeline a.what:hover, .timeline a.what:focus-visible {
+    color: var(--hot);
+    border-bottom-color: var(--hot);
+    text-shadow: 0 0 14px rgba(255, 110, 199, .9);
+  }
 
   .release-line {
     margin-top: 2.6rem;
@@ -539,8 +550,10 @@
   }
 
   const MILESTONES = [
-    { date: new Date(2023, 11, 5),  when: '5 dec 2023',  what: 'Trailer 1 · Vice City avslöjas' },
-    { date: new Date(2025, 4, 6),   when: '6 maj 2025',  what: 'Trailer 2 · Jason & Lucia' },
+    { date: new Date(2023, 11, 5),  when: '5 dec 2023',  what: 'Trailer 1 · Vice City avslöjas',
+      url: 'https://www.youtube.com/watch?v=QdBZY2fkU-0' },
+    { date: new Date(2025, 4, 6),   when: '6 maj 2025',  what: 'Trailer 2 · Jason & Lucia',
+      url: 'https://www.youtube.com/watch?v=VQRLujxTm3c' },
     { date: new Date(2026, 5, 25),  when: '25 jun 2026', what: 'Förhandsbokningen öppnar' },
     { date: new Date(2026, 10, 12), when: '12 nov 2026', what: 'Förladdningen startar' },
     { date: new Date(2026, 10, 19), when: '19 nov 2026', what: 'Release · PS5 & Xbox Series X|S' }
@@ -558,8 +571,10 @@
       let cls = passed ? 'passed' : '';
       if (!passed && !nextFound) { cls += ' next'; nextFound = true; }
       li.className = cls.trim();
-      li.innerHTML = '<span class="when">' + ms.when + '</span>' +
-                     '<span class="what">' + ms.what + '</span>';
+      const what = ms.url
+        ? '<a class="what" href="' + ms.url + '" target="_blank" rel="noopener noreferrer">' + ms.what + ' ↗</a>'
+        : '<span class="what">' + ms.what + '</span>';
+      li.innerHTML = '<span class="when">' + ms.when + '</span>' + what;
       list.appendChild(li);
     });
   }
