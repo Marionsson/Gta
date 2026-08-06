@@ -77,7 +77,21 @@
     height: min(72vmin, 560px);
     pointer-events: none;
   }
+  .sun-wrap::before {
+    content: "";
+    position: absolute;
+    inset: -22%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 110, 199, .5) 0%, rgba(255, 62, 138, .25) 45%, transparent 70%);
+    animation: glowPulse 6s ease-in-out infinite;
+    will-change: opacity;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: .7; }
+    50% { opacity: 1; }
+  }
   .sun {
+    position: relative;
     width: 100%; height: 100%;
     border-radius: 50%;
     background: linear-gradient(180deg, #ffe259 0%, var(--orange) 35%, var(--pink) 70%, #b3178f 100%);
@@ -85,13 +99,6 @@
       repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
     mask: linear-gradient(#000 0 0) top/100% 55% no-repeat,
       repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
-    filter: drop-shadow(0 0 60px rgba(255, 110, 199, .55))
-            drop-shadow(0 0 140px rgba(255, 62, 138, .35));
-    animation: sunPulse 6s ease-in-out infinite;
-  }
-  @keyframes sunPulse {
-    0%, 100% { filter: drop-shadow(0 0 60px rgba(255,110,199,.55)) drop-shadow(0 0 140px rgba(255,62,138,.35)); }
-    50% { filter: drop-shadow(0 0 80px rgba(255,110,199,.75)) drop-shadow(0 0 180px rgba(255,62,138,.5)); }
   }
 
   /* ---------- Grid floor ---------- */
@@ -99,7 +106,7 @@
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: 300vw;
+    width: 220vw;
     height: 24%;
     transform: translateX(-50%);
     perspective: 260px;
@@ -109,17 +116,21 @@
   .floor::before {
     content: "";
     position: absolute;
-    inset: -100% 0 0 0;
+    left: 0; right: 0;
+    top: -140%;
+    bottom: -70px;
     background:
       repeating-linear-gradient(90deg, var(--grid) 0 2px, transparent 2px 90px),
       repeating-linear-gradient(0deg, var(--grid) 0 2px, transparent 2px 70px);
-    transform: rotateX(62deg);
+    transform: rotateX(62deg) translateY(0);
     transform-origin: bottom;
     animation: gridScroll 2.6s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
   }
   @keyframes gridScroll {
-    from { background-position: 0 0, 0 0; }
-    to   { background-position: 0 0, 0 70px; }
+    from { transform: rotateX(62deg) translateY(0); }
+    to   { transform: rotateX(62deg) translateY(70px); }
   }
   .floor::after {
     content: "";
@@ -201,8 +212,7 @@
     padding: clamp(.8rem, 2.4vw, 1.4rem) clamp(.4rem, 1.6vw, 1rem);
     border: 1px solid rgba(255, 110, 199, .45);
     border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .72), rgba(43, 15, 78, .55));
-    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
     box-shadow:
       0 0 0 1px rgba(123, 77, 255, .15),
       0 0 32px rgba(255, 62, 138, .18),
@@ -240,8 +250,7 @@
     padding: 1.4rem 1.6rem 1.2rem;
     border: 1px solid rgba(255, 110, 199, .35);
     border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .78), rgba(43, 15, 78, .6));
-    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
     box-shadow:
       0 0 0 1px rgba(123, 77, 255, .15),
       0 0 32px rgba(255, 62, 138, .15),
@@ -286,8 +295,7 @@
     padding: 1.6rem 1.8rem;
     border: 1px solid rgba(255, 110, 199, .35);
     border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .78), rgba(43, 15, 78, .6));
-    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
     box-shadow:
       0 0 0 1px rgba(123, 77, 255, .15),
       0 0 32px rgba(255, 62, 138, .15),
@@ -426,7 +434,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sun, .floor::before, .palm .fronds, .star, .unit .num.tick,
+    .sun-wrap::before, .floor::before, .palm .fronds, .star, .unit .num.tick,
     .timeline li.next::before { animation: none !important; }
     .bar .fill { transition: none; }
   }
@@ -555,6 +563,8 @@
     { date: new Date(2025, 4, 6),   when: '6 maj 2025',  what: 'Trailer 2 · Jason & Lucia',
       url: 'https://www.youtube.com/watch?v=VQRLujxTm3c' },
     { date: new Date(2026, 5, 25),  when: '25 jun 2026', what: 'Förhandsbokningen öppnar' },
+    { date: new Date(2026, 7, 27, 21, 0), when: '27 aug 2026', what: 'An Extended Look · Netflix-premiär kl 21:00',
+      url: 'https://www.netflix.com/GTAVI' },
     { date: new Date(2026, 10, 12), when: '12 nov 2026', what: 'Förladdningen startar' },
     { date: new Date(2026, 10, 19), when: '19 nov 2026', what: 'Release · PS5 & Xbox Series X|S' }
   ];
