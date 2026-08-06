@@ -60,10 +60,10 @@
     background: #fff;
     border-radius: 50%;
     opacity: .7;
-    animation: twinkle 3s infinite ease-in-out;
+    animation: twinkle 8s infinite ease-in-out;
   }
   @keyframes twinkle {
-    0%, 100% { opacity: .15; }
+    0%, 100% { opacity: .3; }
     50% { opacity: .8; }
   }
 
@@ -83,7 +83,7 @@
     inset: -22%;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255, 110, 199, .5) 0%, rgba(255, 62, 138, .25) 45%, transparent 70%);
-    animation: glowPulse 6s ease-in-out infinite;
+    animation: glowPulse 14s ease-in-out infinite;
     will-change: opacity;
   }
   @keyframes glowPulse {
@@ -124,7 +124,7 @@
       repeating-linear-gradient(0deg, var(--grid) 0 2px, transparent 2px 70px);
     transform: rotateX(62deg) translateY(0);
     transform-origin: bottom;
-    animation: gridScroll 2.6s linear infinite;
+    animation: gridScroll 8s linear infinite;
     will-change: transform;
     backface-visibility: hidden;
   }
@@ -152,8 +152,8 @@
   }
   .palm.left  { left: -4vmin;  transform: scaleX(-1) rotate(-3deg); }
   .palm.right { right: -4vmin; transform: rotate(-4deg); }
-  .palm .fronds { transform-origin: 78% 22%; animation: sway 7s ease-in-out infinite; }
-  .palm.right .fronds { animation-delay: -3.5s; }
+  .palm .fronds { transform-origin: 78% 22%; animation: sway 12s ease-in-out infinite; }
+  .palm.right .fronds { animation-delay: -6s; }
   @keyframes sway {
     0%, 100% { transform: rotate(0deg); }
     50% { transform: rotate(2.4deg); }
@@ -228,11 +228,6 @@
       0 0 42px rgba(255, 62, 138, .5);
     font-variant-numeric: tabular-nums;
     display: block;
-  }
-  .unit .num.tick { animation: pop .5s ease; }
-  @keyframes pop {
-    0% { transform: translateY(-6px); opacity: .2; }
-    100% { transform: translateY(0); opacity: 1; }
   }
   .unit .label {
     display: block;
@@ -348,7 +343,7 @@
     box-shadow: 0 0 14px rgba(255, 62, 138, .9);
   }
   .timeline li.next::before {
-    animation: nextPulse 2s ease-in-out infinite;
+    animation: nextPulse 5s ease-in-out infinite;
   }
   @keyframes nextPulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(255, 110, 199, .6); }
@@ -434,7 +429,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sun-wrap::before, .floor::before, .palm .fronds, .star, .unit .num.tick,
+    .sun-wrap::before, .floor::before, .palm .fronds, .star,
     .timeline li.next::before { animation: none !important; }
     .bar .fill { transition: none; }
   }
@@ -527,11 +522,7 @@
   function setNum(key, val) {
     if (prev[key] === val) return;
     prev[key] = val;
-    const el = els[key];
-    el.textContent = val;
-    el.classList.remove('tick');
-    void el.offsetWidth;
-    el.classList.add('tick');
+    els[key].textContent = val;
   }
 
   function update() {
@@ -605,7 +596,7 @@
       s.className = 'star';
       s.style.left = Math.random() * 100 + '%';
       s.style.top = Math.random() * 100 + '%';
-      s.style.animationDelay = (Math.random() * 3) + 's';
+      s.style.animationDelay = (Math.random() * 8) + 's';
       s.style.transform = 'scale(' + (0.5 + Math.random() * 1.4) + ')';
       wrap.appendChild(s);
     }
