@@ -1,614 +1,402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nedräkning till GTA VI — 19 november 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --sky-top: #0d0620;
-    --sky-mid: #2b0f4e;
-    --pink: #ff3e8a;
-    --hot: #ff6ec7;
-    --orange: #ff9a3e;
-    --violet: #7b4dff;
-    --cream: #fff4e0;
-    --grid: rgba(255, 62, 138, .55);
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#100b20">
+  <meta name="description" content="En inofficiell GTA VI-nedräkning med Vice City-känsla, milstolpar och tid kvar till den 19 november 2026.">
+  <title>GTA VI | Nedräkning till Vice City</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090916;
+      --panel: #151125;
+      --panel-light: #1b1530;
+      --text: #fff7f0;
+      --muted: #b5aabe;
+      --pink: #ff4f9a;
+      --rose: #ff8baf;
+      --orange: #ffb36f;
+      --violet: #8f6aff;
+      --line: rgba(255, 213, 222, .16);
+      --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+      --font-body: 'Space Grotesk', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible { outline: 3px solid var(--orange); outline-offset: 5px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .container { width: min(1180px, calc(100% - 56px)); margin-inline: auto; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Filmisk huvudscen, helt byggd i CSS och SVG */
+    .hero { isolation: isolate; position: relative; display: flex; flex-direction: column; min-height: 880px; min-height: max(850px, 100svh); overflow: hidden; background:
+      radial-gradient(ellipse 56% 35% at 50% 69%, rgba(255,140,101,.56), transparent 81%),
+      radial-gradient(ellipse 60% 50% at 77% 35%, rgba(163,44,111,.28), transparent 79%),
+      linear-gradient(180deg, #0c0a23 0%, #231343 29%, #68316b 53%, #dc6089 73%, #22142d 79%, #0b0a19 100%);
+    }
+    .hero::after { content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 22%, rgba(6,5,17,.38) 100%); }
+    .noise { position: absolute; z-index: 6; inset: 0; pointer-events: none; opacity: .10; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E"); }
+    .stars { position: absolute; z-index: -1; inset: 0 0 32%; pointer-events: none; }
+    .star { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #ffe5f3; box-shadow: 0 0 9px #fff; animation: flicker 6s ease-in-out infinite; }
+    @keyframes flicker { 0%, 100% { opacity: .22; } 50% { opacity: .82; } }
+    .sun-glow { position: absolute; z-index: -1; width: min(62vw, 690px); aspect-ratio: 1; border-radius: 50%; left: 50%; top: 47%; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(255,174,117,.32), rgba(250,78,152,.18) 45%, transparent 72%); filter: blur(11px); animation: breathe 10s ease-in-out infinite; }
+    .sun { position: absolute; z-index: -1; width: min(45vw, 490px); aspect-ratio: 1; left: 50%; top: 49%; transform: translate(-50%, -50%); border-radius: 50%; background: linear-gradient(#fff0aa 0%, #ffcd7f 24%, #ff946d 50%, #fa538f 76%, #bd408f 100%); -webkit-mask-image: linear-gradient(#000 0 0), repeating-linear-gradient(180deg, #000 0 6.5%, transparent 7% 11%); mask-image: linear-gradient(#000 0 0), repeating-linear-gradient(180deg, #000 0 6.5%, transparent 7% 11%); -webkit-mask-size: 100% 58%, 100% 43%; mask-size: 100% 58%, 100% 43%; -webkit-mask-position: top, bottom; mask-position: top, bottom; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; filter: drop-shadow(0 0 36px rgba(255,145,107,.47)); opacity: .96; }
+    @keyframes breathe { 0%,100% { opacity:.7; } 50% { opacity: 1; } }
+    .skyline { position: absolute; z-index: -1; width: 100%; min-width: 1050px; height: 290px; bottom: 19%; left: 50%; transform: translateX(-50%); fill: #201329; opacity: .77; pointer-events: none; }
+    .palm { position: absolute; z-index: 0; bottom: 12%; width: clamp(190px, 23vw, 340px); height: auto; fill: #100a20; opacity: .9; pointer-events: none; filter: drop-shadow(0 0 22px rgba(18, 10, 31, .8)); }
+    .palm.left { left: -83px; transform: scaleX(-1) rotate(-11deg); }
+    .palm.right { right: -90px; transform: rotate(-9deg); }
+    .palm .fronds { transform-origin: 78% 22%; animation: sway 11s ease-in-out infinite; }
+    .palm.right .fronds { animation-delay: -5.5s; }
+    @keyframes sway { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(2deg); } }
+    .grid-floor { position: absolute; z-index: -1; bottom: 0; left: -15%; width: 130%; height: 25%; overflow: hidden; perspective: 260px; opacity: .75; }
+    .grid-floor::before { content: ''; position: absolute; inset: -100% -20% -180px; background: repeating-linear-gradient(90deg, rgba(248,93,183,.43) 0 2px, transparent 2px 98px), repeating-linear-gradient(0deg, rgba(248,93,183,.47) 0 2px, transparent 2px 82px); transform-origin: bottom; transform: rotateX(69deg); animation: grid-move 9s linear infinite; }
+    .grid-floor::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #120e24 0%, transparent 40%, rgba(9,9,22,.65) 100%); }
+    @keyframes grid-move { to { transform: rotateX(69deg) translateY(82px); } }
 
-  html, body { height: 100%; }
+    .topbar { z-index: 9; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 30px; }
+    .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: .73rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+    .brand-icon { display: grid; place-items: center; width: 40px; height: 40px; font: 1.5rem var(--font-display); letter-spacing: -.02em; color: #171022; background: linear-gradient(135deg, #ffcf90, #ff5fa6); border-radius: 8px 1px 8px 1px; transform: skew(-7deg); }
+    .nav-actions { display: flex; align-items: center; gap: 22px; }
+    .nav-link { text-decoration: none; font-size: .76rem; font-weight: 700; letter-spacing: .08em; color: #f9e8f4; transition: color .2s; }
+    .nav-link:hover { color: var(--orange); }
+    .nav-official { border: 1px solid rgba(255,231,231,.33); padding: 11px 18px; border-radius: 99px; backdrop-filter: blur(12px); }
+    .nav-official:hover { border-color: var(--orange); }
 
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: var(--sky-top);
-    color: var(--cream);
-    overflow-x: hidden;
-  }
+    .hero-body { z-index: 2; position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 48px 0 91px; }
+    .overline { display: inline-flex; align-items: center; gap: 13px; font-size: .74rem; font-weight: 700; letter-spacing: .30em; text-transform: uppercase; color: #ffdfb9; }
+    .overline::before, .overline::after { content: ''; width: 30px; height: 1px; background: #ffb987; }
+    .hero-title { margin: 18px 0 2px; font: 400 clamp(6.7rem, 17vw, 14.4rem)/.92 var(--font-display); letter-spacing: -.042em; text-shadow: 0 8px 60px rgba(26,9,38,.4); white-space: nowrap; }
+    .hero-title .gta { color: #fff2eb; }
+    .hero-title .vi { background: linear-gradient(180deg, #fff0d7 1%, #ffd0a4 31%, #ff93a6 67%, #f34f9d 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 10px 19px rgba(205,44,112,.32)); }
+    .hero-subtitle { margin: 0; font-family: var(--font-display); font-size: clamp(1.15rem, 3vw, 2.05rem); line-height: 1.3; letter-spacing: .24em; text-transform: uppercase; color: #fff1ef; text-shadow: 0 2px 18px #18092d; }
+    .hero-description { max-width: 530px; margin: 15px 0 0; color: #ffe6e2; font-size: .95rem; line-height: 1.65; text-shadow: 0 1px 14px #230c32; }
+    .release-date { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; margin-top: 21px; font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff6f2; }
+    .release-date .dot { height: 4px; width: 4px; border-radius: 50%; background: var(--orange); }
+    .countdown-wrap { width: 100%; max-width: 878px; margin-top: clamp(35px, 6vh, 61px); }
+    .countdown-heading { display: flex; justify-content: space-between; align-items: center; padding: 0 6px 12px; gap: 14px; text-align: left; font-size: .68rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff1ee; }
+    .countdown-heading span:last-child { color: #fff0d1; }
+    .countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .timer-card { overflow: hidden; position: relative; padding: 26px 12px 21px; border: 1px solid rgba(255,233,239,.33); border-radius: 16px; background: linear-gradient(160deg, rgba(32,20,57,.89), rgba(15,11,33,.92)); box-shadow: inset 0 1px 0 rgba(255,255,255,.20), 0 24px 62px rgba(14, 8, 28, .27); backdrop-filter: blur(14px); }
+    .timer-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: linear-gradient(90deg, transparent, rgba(255, 187, 171, .95), transparent); }
+    .timer-card:first-child { border-color: rgba(255,177,138,.65); background: linear-gradient(160deg, rgba(94,38,72,.87), rgba(28,14,45,.94)); }
+    .timer-num { display: block; font: 400 clamp(3.4rem, 8.5vw, 6.6rem)/1 var(--font-display); font-variant-numeric: tabular-nums; color: #fff6eb; text-shadow: 0 4px 26px rgba(255,100,168,.28); }
+    .timer-label { display: block; margin-top: 12px; font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #edb9d0; }
+    .released-message { display: none; margin-top: 34px; padding: 35px; max-width: 850px; border-radius: 18px; border: 1px solid rgba(255,191,156,.6); background: rgba(22,12,37,.8); font: clamp(2.3rem,5vw,5rem)/1.15 var(--font-display); text-transform: uppercase; }
+    .is-released .countdown-wrap { display: none; }
+    .is-released .released-message { display: block; }
+    .zone-note { margin: 15px 0 0; color: rgba(255,234,241,.77); font-size: .73rem; }
+    .hero-bottom { z-index: 2; position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 25px 0; border-top: 1px solid rgba(255,211,232,.3); font-size: .67rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,233,234,.8); }
+    .scroll-cue { text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .scroll-cue:hover { color: #fff; }
+    .scroll-cue svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.8; }
 
-  .scene {
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: linear-gradient(180deg,
-      var(--sky-top) 0%,
-      var(--sky-mid) 34%,
-      #6a1b6e 52%,
-      #c62a7c 66%,
-      var(--orange) 78%,
-      #1a0b33 78.2%,
-      #12071f 100%);
-  }
+    /* Undersektion med mer editorial känsla */
+    .below { position: relative; background: radial-gradient(ellipse 42% 32% at 92% 5%, rgba(124,56,124,.15), transparent), #090916; }
+    .below::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,126,184,.5), transparent); }
+    .section { padding-block: 98px 106px; }
+    .section-kicker { display: flex; align-items: center; gap: 11px; margin: 0 0 15px; color: var(--rose); font-size: .68rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+    .section-kicker::before { content: ''; width: 22px; height: 2px; background: var(--pink); }
+    .section-title { font: clamp(2.55rem,5.9vw,5rem)/1.09 var(--font-display); text-transform: uppercase; letter-spacing: .015em; margin: 0; }
+    .section-title .accent { color: var(--orange); }
+    .section-intro { color: var(--muted); line-height: 1.7; margin: 17px 0 0; max-width: 480px; font-size: .94rem; }
+    .overview { display: grid; grid-template-columns: 1.3fr .9fr; gap: 18px; margin-top: 37px; }
+    .glass-panel { position: relative; border: 1px solid var(--line); border-radius: 19px; background: linear-gradient(150deg, rgba(36,27,57,.83), rgba(15,12,31,.95)); box-shadow: inset 0 1px 0 rgba(255,255,255,.055); }
+    .progress-panel { padding: clamp(24px, 4vw, 39px); }
+    .panel-small { color: var(--rose); font-size: .68rem; font-weight: 700; letter-spacing: .19em; text-transform: uppercase; }
+    .progress-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 18px; }
+    .progress-title { font: clamp(1.5rem, 3vw, 2.3rem)/1.15 var(--font-display); letter-spacing: .015em; text-transform: uppercase; }
+    .progress-number { font: 2rem var(--font-display); color: #ffd1a5; white-space: nowrap; }
+    .progress-track { margin-top: 25px; height: 11px; border-radius: 99px; overflow: hidden; background: #34243d; box-shadow: inset 0 1px 4px rgba(0,0,0,.35); }
+    .progress-fill { width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #8d60ee 0%, #ff589e 58%, #ffd080 100%); box-shadow: 0 0 24px rgba(255,90,155,.43); transition: width .7s ease; }
+    .progress-dates { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; color: #b4a5bb; font-size: .72rem; line-height: 1.55; }
+    .progress-dates strong { display: block; margin-bottom: 4px; font-weight: 700; color: #fff0e9; }
+    .progress-dates span:last-child { text-align: right; }
+    .next-panel { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(24px, 4vw, 39px); background: radial-gradient(circle at 100% 100%, rgba(255,97,139,.13), transparent 65%), linear-gradient(150deg, #24172c, #150f25); }
+    .next-title { margin: 19px 0 9px; font: clamp(1.6rem,3vw,2.3rem)/1.18 var(--font-display); text-transform: uppercase; }
+    .next-desc { font-size: .83rem; color: var(--muted); line-height: 1.6; }
+    .next-bottom { display: flex; justify-content: space-between; gap: 16px; align-items: flex-end; margin-top: 22px; }
+    .next-date { font-size: .83rem; font-weight: 700; color: #ffca9e; }
+    .next-relative { color: #f8dde7; font-size: .75rem; }
+    .timeline-section { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(45px, 8vw, 110px); padding-top: 115px; }
+    .timeline-description { position: sticky; top: 34px; align-self: start; }
+    .timeline { list-style: none; padding: 0 0 0 30px; margin: 0; border-left: 1px solid rgba(255,144,179,.25); }
+    .timeline-item { position: relative; padding: 0 0 14px 24px; }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-item::before { content: ''; position: absolute; z-index: 1; width: 11px; height: 11px; border-radius: 50%; left: -36px; top: 30px; background: #25182d; border: 2px solid #7b5b80; box-shadow: 0 0 0 6px #090916; }
+    .timeline-item.passed::before { background: var(--pink); border-color: #ff9cc9; }
+    .timeline-item.next::before { background: #ffbd83; border-color: #ffe0ba; box-shadow: 0 0 0 6px #090916, 0 0 0 11px rgba(255,140,109,.13); }
+    .event { display: block; text-decoration: none; padding: 23px 25px; border: 1px solid var(--line); border-radius: 14px; background: rgba(28,22,44,.55); transition: border-color .22s, background .22s, transform .22s; }
+    a.event:hover { border-color: rgba(255,158,190,.52); background: rgba(47,27,61,.82); transform: translateY(-2px); }
+    .timeline-item.next .event { border-color: rgba(255,164,130,.55); background: linear-gradient(135deg, rgba(81,38,66,.75), rgba(36,23,50,.86)); }
+    .event-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .event-date { font-size: .69rem; font-weight: 700; letter-spacing: .15em; color: #efadc5; text-transform: uppercase; }
+    .event-status { font-size: .63rem; font-weight: 700; letter-spacing: .12em; color: #a99ab1; text-transform: uppercase; }
+    .timeline-item.next .event-status { color: #ffd2a0; }
+    .event-name { display: block; margin-top: 12px; font-size: 1.1rem; line-height: 1.35; font-weight: 700; color: #fff3f0; }
+    .event-detail { display: block; margin-top: 6px; font-size: .78rem; line-height: 1.6; color: #b6a8be; }
+    .external-arrow { display: inline-block; margin-left: 5px; color: #ffbd91; }
+    .footer { border-top: 1px solid var(--line); padding: 30px 0 36px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; align-items: center; color: #94869f; font-size: .73rem; line-height: 1.7; }
+    .footer-inner p { margin: 0; max-width: 640px; }
+    .footer-inner a { color: #edb7d1; text-underline-offset: 3px; white-space: nowrap; }
 
-  /* ---------- Stars ---------- */
-  .stars {
-    position: absolute;
-    inset: 0 0 45% 0;
-    pointer-events: none;
-  }
-  .star {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: .7;
-    animation: twinkle 8s infinite ease-in-out;
-  }
-  @keyframes twinkle {
-    0%, 100% { opacity: .3; }
-    50% { opacity: .8; }
-  }
-
-  /* ---------- The sun ---------- */
-  .sun-wrap {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -58%);
-    width: min(72vmin, 560px);
-    height: min(72vmin, 560px);
-    pointer-events: none;
-  }
-  .sun-wrap::before {
-    content: "";
-    position: absolute;
-    inset: -22%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 110, 199, .5) 0%, rgba(255, 62, 138, .25) 45%, transparent 70%);
-    animation: glowPulse 14s ease-in-out infinite;
-    will-change: opacity;
-  }
-  @keyframes glowPulse {
-    0%, 100% { opacity: .7; }
-    50% { opacity: 1; }
-  }
-  .sun {
-    position: relative;
-    width: 100%; height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(180deg, #ffe259 0%, var(--orange) 35%, var(--pink) 70%, #b3178f 100%);
-    -webkit-mask: linear-gradient(#000 0 0) top/100% 55% no-repeat,
-      repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
-    mask: linear-gradient(#000 0 0) top/100% 55% no-repeat,
-      repeating-linear-gradient(180deg, #000 0 5.2%, transparent 5.2% 9%) bottom/100% 45% no-repeat;
-  }
-
-  /* ---------- Grid floor ---------- */
-  .floor {
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 220vw;
-    height: 24%;
-    transform: translateX(-50%);
-    perspective: 260px;
-    overflow: hidden;
-    pointer-events: none;
-  }
-  .floor::before {
-    content: "";
-    position: absolute;
-    left: 0; right: 0;
-    top: -140%;
-    bottom: -70px;
-    background:
-      repeating-linear-gradient(90deg, var(--grid) 0 2px, transparent 2px 90px),
-      repeating-linear-gradient(0deg, var(--grid) 0 2px, transparent 2px 70px);
-    transform: rotateX(62deg) translateY(0);
-    transform-origin: bottom;
-    animation: gridScroll 8s linear infinite;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-  @keyframes gridScroll {
-    from { transform: rotateX(62deg) translateY(0); }
-    to   { transform: rotateX(62deg) translateY(70px); }
-  }
-  .floor::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #12071f 0%, transparent 40%);
-  }
-
-  /* ---------- Palms ---------- */
-  .palm {
-    position: absolute;
-    bottom: 17%;
-    width: min(34vmin, 300px);
-    height: auto;
-    fill: #0a0416;
-    filter: drop-shadow(0 0 18px rgba(13, 6, 32, .9));
-    pointer-events: none;
-    z-index: 2;
-  }
-  .palm.left  { left: -4vmin;  transform: scaleX(-1) rotate(-3deg); }
-  .palm.right { right: -4vmin; transform: rotate(-4deg); }
-  .palm .fronds { transform-origin: 78% 22%; animation: sway 12s ease-in-out infinite; }
-  .palm.right .fronds { animation-delay: -6s; }
-  @keyframes sway {
-    0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(2.4deg); }
-  }
-
-  /* ---------- Content ---------- */
-  .content {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    padding: 4rem 1.25rem 6rem;
-    width: 100%;
-    max-width: 980px;
-  }
-
-  .eyebrow {
-    font-size: clamp(.7rem, 1.6vw, .85rem);
-    letter-spacing: .45em;
-    text-transform: uppercase;
-    color: var(--hot);
-    text-shadow: 0 0 12px rgba(255, 110, 199, .8);
-    margin-bottom: 1rem;
-  }
-
-  h1 {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(3.6rem, 15vw, 9.5rem);
-    line-height: .92;
-    text-transform: uppercase;
-    letter-spacing: .02em;
-    background: linear-gradient(180deg, #fff 8%, var(--hot) 45%, var(--pink) 72%, var(--violet) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    filter: drop-shadow(0 0 24px rgba(255, 62, 138, .45))
-            drop-shadow(0 4px 0 rgba(123, 77, 255, .5));
-  }
-
-  .tagline {
-    margin-top: .9rem;
-    font-size: clamp(.9rem, 2.2vw, 1.1rem);
-    color: rgba(255, 244, 224, .82);
-    letter-spacing: .06em;
-  }
-
-  /* ---------- Countdown ---------- */
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: clamp(.5rem, 2.4vw, 1.4rem);
-    margin: clamp(2rem, 5vh, 3.2rem) 0 1.6rem;
-    flex-wrap: wrap;
-  }
-  .unit {
-    min-width: clamp(72px, 18vw, 150px);
-    padding: clamp(.8rem, 2.4vw, 1.4rem) clamp(.4rem, 1.6vw, 1rem);
-    border: 1px solid rgba(255, 110, 199, .45);
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
-    box-shadow:
-      0 0 0 1px rgba(123, 77, 255, .15),
-      0 0 32px rgba(255, 62, 138, .18),
-      inset 0 1px 0 rgba(255, 255, 255, .12);
-  }
-  .unit .num {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(2.4rem, 8.5vw, 5rem);
-    line-height: 1;
-    color: var(--cream);
-    text-shadow:
-      0 0 14px rgba(255, 110, 199, .85),
-      0 0 42px rgba(255, 62, 138, .5);
-    font-variant-numeric: tabular-nums;
-    display: block;
-  }
-  .unit .label {
-    display: block;
-    margin-top: .5rem;
-    font-size: clamp(.62rem, 1.6vw, .8rem);
-    letter-spacing: .35em;
-    text-transform: uppercase;
-    color: var(--hot);
-  }
-
-  /* ---------- Progress ---------- */
-  .progress {
-    max-width: 640px;
-    margin: 2.4rem auto 0;
-    padding: 1.4rem 1.6rem 1.2rem;
-    border: 1px solid rgba(255, 110, 199, .35);
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
-    box-shadow:
-      0 0 0 1px rgba(123, 77, 255, .15),
-      0 0 32px rgba(255, 62, 138, .15),
-      inset 0 1px 0 rgba(255, 255, 255, .1);
-  }
-  .progress .meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: .72rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: rgba(255, 244, 224, .6);
-    margin-bottom: .5rem;
-  }
-  .bar {
-    height: 10px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, .08);
-    border: 1px solid rgba(255, 110, 199, .3);
-    overflow: hidden;
-  }
-  .bar .fill {
-    height: 100%;
-    width: 0%;
-    border-radius: inherit;
-    background: linear-gradient(90deg, var(--violet), var(--pink), var(--orange));
-    box-shadow: 0 0 18px rgba(255, 62, 138, .7);
-    transition: width 1.2s ease;
-  }
-  .progress .pct {
-    margin-top: .55rem;
-    font-size: .8rem;
-    color: var(--hot);
-    letter-spacing: .12em;
-  }
-
-  /* ---------- Vertikal tidslinje ---------- */
-  .timeline {
-    max-width: 560px;
-    margin: 2rem auto 0;
-    text-align: left;
-    padding: 1.6rem 1.8rem;
-    border: 1px solid rgba(255, 110, 199, .35);
-    border-radius: 14px;
-    background: linear-gradient(180deg, rgba(13, 6, 32, .88), rgba(43, 15, 78, .78));
-    box-shadow:
-      0 0 0 1px rgba(123, 77, 255, .15),
-      0 0 32px rgba(255, 62, 138, .15),
-      inset 0 1px 0 rgba(255, 255, 255, .1);
-  }
-  .timeline h2 {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    text-align: center;
-    color: var(--hot);
-    text-shadow: 0 0 14px rgba(255, 110, 199, .7);
-    margin-bottom: 1.6rem;
-  }
-  .timeline ol {
-    list-style: none;
-    position: relative;
-    padding-left: 2.2rem;
-  }
-  .timeline ol::before {
-    content: "";
-    position: absolute;
-    left: 10px;
-    top: 6px;
-    bottom: 6px;
-    width: 2px;
-    background: linear-gradient(180deg, var(--violet), var(--pink), var(--orange));
-    box-shadow: 0 0 10px rgba(255, 62, 138, .5);
-    border-radius: 2px;
-  }
-  .timeline li {
-    position: relative;
-    padding: 0 0 1.5rem 0;
-  }
-  .timeline li:last-child { padding-bottom: 0; }
-  .timeline li::before {
-    content: "";
-    position: absolute;
-    left: calc(-2.2rem + 4px);
-    top: 4px;
-    width: 14px; height: 14px;
-    border-radius: 50%;
-    background: #2b0f4e;
-    border: 2px solid rgba(255, 110, 199, .4);
-  }
-  .timeline li.passed::before {
-    background: var(--pink);
-    border-color: var(--cream);
-    box-shadow: 0 0 14px rgba(255, 62, 138, .9);
-  }
-  .timeline li.next::before {
-    animation: nextPulse 5s ease-in-out infinite;
-  }
-  @keyframes nextPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 110, 199, .6); }
-    50% { box-shadow: 0 0 0 8px rgba(255, 110, 199, 0); }
-  }
-  .timeline .when {
-    display: block;
-    font-size: .68rem;
-    letter-spacing: .28em;
-    text-transform: uppercase;
-    color: rgba(255, 244, 224, .45);
-  }
-  .timeline li.passed .when { color: var(--hot); }
-  .timeline .what {
-    display: block;
-    margin-top: .15rem;
-    font-size: clamp(.92rem, 2.2vw, 1.05rem);
-    font-weight: 500;
-    color: rgba(255, 244, 224, .55);
-  }
-  .timeline li.passed .what {
-    color: var(--cream);
-    text-shadow: 0 0 10px rgba(255, 110, 199, .4);
-  }
-  .timeline a.what {
-    text-decoration: none;
-    border-bottom: 1px dashed rgba(255, 110, 199, .5);
-    width: fit-content;
-    transition: color .2s ease, border-color .2s ease, text-shadow .2s ease;
-  }
-  .timeline a.what:hover, .timeline a.what:focus-visible {
-    color: var(--hot);
-    border-bottom-color: var(--hot);
-    text-shadow: 0 0 14px rgba(255, 110, 199, .9);
-  }
-
-  .release-line {
-    margin-top: 2.6rem;
-    font-size: clamp(.8rem, 2vw, .95rem);
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    color: rgba(255, 244, 224, .85);
-    text-shadow: 0 1px 8px rgba(13, 6, 32, .9), 0 0 20px rgba(13, 6, 32, .7);
-  }
-  .release-line strong {
-    color: var(--cream);
-    text-shadow: 0 0 12px rgba(255, 110, 199, .8);
-  }
-
-  .footnote {
-    position: relative;
-    z-index: 3;
-    text-align: center;
-    padding: 1rem 1.25rem 1.6rem;
-    font-size: .68rem;
-    letter-spacing: .08em;
-    color: rgba(255, 244, 224, .35);
-    background: #12071f;
-  }
-
-  /* ---------- Scanlines ---------- */
-  .scanlines {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    pointer-events: none;
-    background: repeating-linear-gradient(180deg, rgba(0,0,0,.14) 0 2px, transparent 2px 4px);
-    mix-blend-mode: multiply;
-    opacity: .5;
-  }
-
-  /* ---------- Celebration state ---------- */
-  .released .countdown, .released .progress { display: none; }
-  .released-msg { display: none; }
-  .released .released-msg {
-    display: block;
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(2rem, 8vw, 4.5rem);
-    text-transform: uppercase;
-    color: var(--cream);
-    text-shadow: 0 0 30px rgba(255, 110, 199, .9);
-    margin: 3rem 0;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .sun-wrap::before, .floor::before, .palm .fronds, .star,
-    .timeline li.next::before { animation: none !important; }
-    .bar .fill { transition: none; }
-  }
-
-  :focus-visible { outline: 2px solid var(--hot); outline-offset: 3px; }
-</style>
+    @media (max-width: 900px) {
+      .hero { min-height: 800px; }
+      .sun { width: min(65vw, 480px); }
+      .sun-glow { width: min(82vw, 600px); }
+      .palm { opacity: .60; }
+      .timeline-section { grid-template-columns: 1fr; gap: 30px; padding-top: 85px; }
+      .timeline-description { position: static; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 32px, 1180px); }
+      .hero { min-height: 790px; min-height: max(770px, 100svh); }
+      .topbar { padding-block: 17px; }
+      .brand { font-size: .63rem; letter-spacing: .12em; }
+      .brand-icon { width: 35px; height: 35px; }
+      .nav-actions { gap: 10px; }
+      .nav-link { font-size: .7rem; }
+      .nav-official { padding: 9px 12px; }
+      .nav-timeline { display: none; }
+      .hero-body { padding: 80px 0 65px; }
+      .hero-title { font-size: clamp(5.8rem, 24vw, 9.5rem); margin-top: 22px; }
+      .hero-subtitle { font-size: clamp(1.07rem, 5vw, 1.4rem); letter-spacing: .16em; }
+      .hero-description { font-size: .85rem; max-width: 360px; }
+      .overline { font-size: .6rem; letter-spacing: .16em; }
+      .overline::before, .overline::after { width: 15px; }
+      .release-date { font-size: .64rem; letter-spacing: .055em; }
+      .countdown-wrap { margin-top: 39px; }
+      .countdown { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .countdown-heading { font-size: .60rem; letter-spacing: .1em; }
+      .timer-card { padding: 17px 12px 15px; border-radius: 12px; }
+      .timer-num { font-size: clamp(3.5rem, 15vw, 5.3rem); }
+      .timer-label { margin-top: 7px; font-size: .61rem; }
+      .sun { width: 75vw; top: 47%; }
+      .sun-glow { width: 108vw; top: 47%; }
+      .skyline { bottom: 19%; }
+      .palm { width: 190px; bottom: 14%; opacity: .45; }
+      .hero-bottom { font-size: .55rem; letter-spacing: .08em; padding: 17px 0; }
+      .zone-note { font-size: .68rem; max-width: 330px; line-height: 1.5; }
+      .section { padding-block: 65px 78px; }
+      .overview { grid-template-columns: 1fr; }
+      .timeline-section { padding-top: 70px; }
+      .timeline { padding-left: 17px; }
+      .timeline-item { padding-left: 18px; }
+      .timeline-item::before { left: -23px; }
+      .event { padding: 21px 18px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
 <body>
-<main class="scene" id="scene">
-  <div class="stars" id="stars" aria-hidden="true"></div>
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="stars" id="stars" aria-hidden="true"></div>
+      <div class="sun-glow" aria-hidden="true"></div>
+      <div class="sun" aria-hidden="true"></div>
+      <svg class="skyline" viewBox="0 0 1440 290" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <path d="M0 290V185h40v-34h43v-48h31v48h42v58h31v-79h42v-40h24v-28h12v28h28v103h42v-54h49v-76h23v76h31v-42h29v-57h19v-44h11v44h20v101h28V95h19V69h13v26h20v-40h29v40h31v114h35v-47h40v-22h47v-61h17V59h9v20h17v66h29v-30h43v-21h15v21h38v80h43v-62h24v-45h15v45h36v-41h23v-51h12v51h23v93h32v-26h29v-79h29v-32h13v32h29v89h22v-46h39v-60h33v60h36v66h56V290Z" />
+        <path opacity=".28" d="M0 290V245h90v-40h35v40h65v-46h40v46h58v-20h53v20h79v-68h31v68h84v-33h65v33h64v-58h28v58h55v-30h61v30h85v-74h37v74h68v-38h40v38h76v-51h65v51h48V290Z" />
+      </svg>
+      <svg class="palm left" viewBox="0 0 200 300" aria-hidden="true"><g class="fronds"><path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/><path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/><path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/><path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/><path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/><path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/><circle cx="150" cy="76" r="7"/><circle cx="162" cy="82" r="6"/></g><path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/></svg>
+      <svg class="palm right" viewBox="0 0 200 300" aria-hidden="true"><g class="fronds"><path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/><path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/><path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/><path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/><path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/><path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/><circle cx="150" cy="76" r="7"/><circle cx="162" cy="82" r="6"/></g><path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/></svg>
+      <div class="grid-floor" aria-hidden="true"></div>
+      <div class="noise" aria-hidden="true"></div>
 
-  <div class="sun-wrap" aria-hidden="true"><div class="sun"></div></div>
+      <nav class="topbar container" aria-label="Huvudnavigation">
+        <a class="brand" href="#top" aria-label="Till startsidan"><span class="brand-icon">VI</span><span>THE LEONIDA<br>COUNTDOWN</span></a>
+        <div class="nav-actions"><a class="nav-link nav-timeline" href="#timeline">Tidslinje</a><a class="nav-link nav-official" href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">Officiell sida ↗</a></div>
+      </nav>
 
-  <svg class="palm left" viewBox="0 0 200 300" aria-hidden="true">
-    <g class="fronds">
-      <path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/>
-      <path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/>
-      <path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/>
-      <path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/>
-      <path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/>
-      <path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/>
-      <circle cx="150" cy="76" r="7"/>
-      <circle cx="162" cy="82" r="6"/>
-    </g>
-    <path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/>
-  </svg>
+      <div class="hero-body container" id="top">
+        <div class="overline">Vice City väntar på dig</div>
+        <h1 class="hero-title" id="page-title"><span class="gta">GTA</span><span class="vi"> VI</span></h1>
+        <p class="hero-subtitle">The wait is almost over</p>
+        <p class="hero-description">Solnedgångar, neonljus och en helt ny historia i Leonida. Nedräkningen till nästa stora kapitel har börjat.</p>
+        <div class="release-date"><span>19 november 2026</span><span class="dot"></span><span>PlayStation 5</span><span class="dot"></span><span>Xbox Series X|S</span></div>
 
-  <svg class="palm right" viewBox="0 0 200 300" aria-hidden="true">
-    <g class="fronds">
-      <path d="M156 66 C120 30 60 26 18 52 C70 44 118 58 148 78 Z"/>
-      <path d="M158 64 C150 18 108 -8 62 -2 C110 10 142 38 152 70 Z"/>
-      <path d="M160 66 C186 28 182 -14 152 -38 C168 -4 168 36 154 64 Z"/>
-      <path d="M162 70 C206 52 228 14 220 -26 C210 18 188 48 158 64 Z"/>
-      <path d="M162 74 C210 76 246 52 256 14 C238 54 204 70 160 68 Z"/>
-      <path d="M158 78 C196 104 240 104 268 80 C234 94 196 90 156 72 Z"/>
-      <circle cx="150" cy="76" r="7"/>
-      <circle cx="162" cy="82" r="6"/>
-    </g>
-    <path d="M150 74 C142 128 130 200 138 300 L166 300 C154 202 158 130 162 76 Z"/>
-  </svg>
+        <div class="countdown-wrap" id="countdown-wrap">
+          <div class="countdown-heading"><span>Release countdown</span><span><span aria-hidden="true">●</span> Live</span></div>
+          <div class="countdown" role="timer" aria-label="Tid kvar till 19 november 2026, lokal midnatt">
+            <div class="timer-card"><span class="timer-num" id="days">--</span><span class="timer-label">Dagar</span></div>
+            <div class="timer-card"><span class="timer-num" id="hours">--</span><span class="timer-label">Timmar</span></div>
+            <div class="timer-card"><span class="timer-num" id="minutes">--</span><span class="timer-label">Minuter</span></div>
+            <div class="timer-card"><span class="timer-num" id="seconds">--</span><span class="timer-label">Sekunder</span></div>
+          </div>
+          <p class="zone-note" id="timezone-note">Nedräkningen utgår från 00:00 i din enhets tidszon.</p>
+        </div>
+        <p class="released-message" id="released-message">Det är dags.<br>Välkommen till Leonida.</p>
+      </div>
+      <div class="hero-bottom container"><span>Leonida / USA &nbsp;·&nbsp; 2026</span><a class="scroll-cue" href="#story">Utforska resan <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></a></div>
+    </section>
 
-  <div class="floor" aria-hidden="true"></div>
+    <div class="below">
+      <section class="section container" id="story" aria-labelledby="story-title">
+        <p class="section-kicker">Resan till Leonida</p>
+        <h2 class="section-title" id="story-title">Snart är <span class="accent">väntan över.</span></h2>
+        <p class="section-intro">Från den första trailern till releasen. Följ milstolparna som tar oss tillbaka till Vice City.</p>
+        <div class="overview">
+          <div class="glass-panel progress-panel">
+            <div class="panel-small">Resan hittills</div>
+            <div class="progress-top"><div class="progress-title">Hur långt har vi kommit?</div><div class="progress-number" id="progress-value">0,0 %</div></div>
+            <div class="progress-track" id="progressbar" role="progressbar" aria-label="Andel av tiden från första trailern till releasen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-dates"><span><strong>05 dec 2023</strong>Trailer 1</span><span><strong>19 nov 2026</strong>Release</span></div>
+          </div>
+          <div class="glass-panel next-panel">
+            <div><div class="panel-small">Nästa milstolpe</div><div class="next-title" id="next-title">Laddar...</div><div class="next-desc" id="next-detail"></div></div>
+            <div class="next-bottom"><div class="next-date" id="next-date"></div><div class="next-relative" id="next-relative"></div></div>
+          </div>
+        </div>
 
-  <div class="content">
-    <p class="eyebrow">Vice City väntar</p>
-    <h1>GTA&nbsp;VI</h1>
-    <p class="tagline">Nedräkningen till decenniets största spelsläpp</p>
-
-    <div class="countdown" role="timer" aria-live="polite" aria-label="Tid kvar till releasen">
-      <div class="unit"><span class="num" id="d">--</span><span class="label">Dagar</span></div>
-      <div class="unit"><span class="num" id="h">--</span><span class="label">Timmar</span></div>
-      <div class="unit"><span class="num" id="m">--</span><span class="label">Minuter</span></div>
-      <div class="unit"><span class="num" id="s">--</span><span class="label">Sekunder</span></div>
+        <div class="timeline-section" id="timeline">
+          <div class="timeline-description"><p class="section-kicker">Vägen hit</p><h2 class="section-title">Ett nytt<br><span class="accent">kapitel.</span></h2><p class="section-intro">Alla stora hållpunkter samlade på ett ställe. Klicka på en trailer för att se den hos Rockstar.</p></div>
+          <ol class="timeline" id="timeline-list" aria-label="Milstolpar inför GTA VI"></ol>
+        </div>
+      </section>
+      <footer class="footer"><div class="container footer-inner"><p>Inofficiell fansida, inte associerad med Rockstar Games eller Take-Two Interactive. Nedräkningen avser midnatt i enhetens tidszon. Faktisk upplåsning kan följa butikens region och plattformens publicerade tider.</p><a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener noreferrer">Rockstar Games ↗</a></div></footer>
     </div>
+  </main>
+  <script>
+    'use strict';
+    // Lokal midnatt på enheten. Plattformsbutikens region kan ha en annan faktisk upplåsningstid.
+    const RELEASE = new Date(2026, 10, 19, 0, 0, 0);
+    const START = new Date(2023, 11, 5, 0, 0, 0);
+    const MILESTONES = [
+      { date: new Date(2023, 11, 5), when: '5 december 2023', title: 'Den första trailern', detail: 'Världen får sin första blick på Leonida och Vice City.', url: 'https://www.rockstargames.com/VI/trailer-1' },
+      { date: new Date(2025, 4, 6), when: '6 maj 2025', title: 'Trailer 2', detail: 'Jason, Lucia och en närmare titt på deras historia.', url: 'https://www.rockstargames.com/VI/trailer-2' },
+      { date: new Date(2026, 5, 25), when: '25 juni 2026', title: 'Förhandsbokningen öppnar', detail: 'GTA VI blir tillgängligt att förhandsboka.', url: 'https://www.rockstargames.com/newswire/article/5171972o3ak5oa/pre-order-grand-theft-auto-vi-on-june-25' },
+      { date: new Date(2026, 7, 27), when: '27 augusti 2026', title: 'An Extended Look', detail: 'En längre titt på spelet via Netflix och Rockstar.', url: 'https://www.rockstargames.com/VI/an-extended-look' },
+      { date: new Date(2026, 9, 15), when: '15 oktober 2026', title: 'Launch Trailer', detail: 'Den sista stora trailern inför releasen.', url: 'https://www.rockstargames.com/newswire/article/517572321a549a/watch-the-grand-theft-auto-vi-launch-trailer' },
+      { date: new Date(2026, 10, 12), when: '12 november 2026', title: 'Förladdningen startar', detail: 'Digitala förhandsköp kan börja hämtas i förväg.', url: 'https://support.rockstargames.com/articles/4QfG4FmZCf5W1gS8jy4UVT/grand-theft-auto-vi-platform-editions-and-versions-Platforms' },
+      { date: RELEASE, when: '19 november 2026', title: 'Grand Theft Auto VI släpps', detail: 'Välkommen tillbaka till Vice City.', url: 'https://www.rockstargames.com/VI' }
+    ];
+    const $ = id => document.getElementById(id);
+    const pad = value => String(value).padStart(2, '0');
+    const prev = Object.create(null);
+    let tickHandle = null;
+    let lastMilestoneDay = null;
 
-    <p class="released-msg">Det har släppts.<br>Vi ses i Leonida.</p>
-
-    <div class="progress">
-      <div class="meta"><span>Trailer 1 · 5 dec 2023</span><span>Release · 19 nov 2026</span></div>
-      <div class="bar" id="bar"><div class="fill" id="fill"></div></div>
-      <p class="pct" id="pct"></p>
-    </div>
-
-    <div class="timeline">
-      <h2>Vägen till Vice City</h2>
-      <ol id="timeline-list"></ol>
-    </div>
-
-    <p class="release-line">Släpps <strong>19 november 2026</strong> · PS5 &amp; Xbox Series X|S</p>
-  </div>
-
-  <div class="scanlines" aria-hidden="true"></div>
-</main>
-
-<footer class="footnote">
-  Inofficiell fansida. Grand Theft Auto är ett varumärke som tillhör Take-Two Interactive. Ingen koppling till Rockstar Games.
-</footer>
-
-<script>
-  // Release: 19 november 2026, lokal midnatt
-  const RELEASE = new Date(2026, 10, 19, 0, 0, 0);
-  const START = new Date(2023, 11, 5); // Trailer 1
-
-  const $ = id => document.getElementById(id);
-  const els = { d: $('d'), h: $('h'), m: $('m'), s: $('s') };
-  const prev = {};
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function setNum(key, val) {
-    if (prev[key] === val) return;
-    prev[key] = val;
-    els[key].textContent = val;
-  }
-
-  function update() {
-    const now = new Date();
-    let diff = RELEASE - now;
-
-    if (diff <= 0) {
-      document.getElementById('scene').classList.add('released');
-      return;
+    function setText(id, value) {
+      if (prev[id] === value) return;
+      prev[id] = value;
+      $(id).textContent = value;
     }
 
-    const days = Math.floor(diff / 86400000);
-    diff -= days * 86400000;
-    const hours = Math.floor(diff / 3600000);
-    diff -= hours * 3600000;
-    const mins = Math.floor(diff / 60000);
-    diff -= mins * 60000;
-    const secs = Math.floor(diff / 1000);
-
-    setNum('d', String(days));
-    setNum('h', pad(hours));
-    setNum('m', pad(mins));
-    setNum('s', pad(secs));
-  }
-
-  const MILESTONES = [
-    { date: new Date(2023, 11, 5),  when: '5 dec 2023',  what: 'Trailer 1 · Vice City avslöjas',
-      url: 'https://www.youtube.com/watch?v=QdBZY2fkU-0' },
-    { date: new Date(2025, 4, 6),   when: '6 maj 2025',  what: 'Trailer 2 · Jason & Lucia',
-      url: 'https://www.youtube.com/watch?v=VQRLujxTm3c' },
-    { date: new Date(2026, 5, 25),  when: '25 jun 2026', what: 'Förhandsbokningen öppnar' },
-    { date: new Date(2026, 7, 27, 21, 0), when: '27 aug 2026', what: 'An Extended Look · Netflix & YouTube',
-      url: 'https://www.youtube.com/watch?v=tJbzMqJGH4k' },
-    { date: new Date(2026, 9, 15),  when: '15 okt 2026', what: 'Launch Trailer',
-      url: 'https://www.youtube.com/watch?v=rz1B4B2yBZY' },
-    { date: new Date(2026, 10, 12), when: '12 nov 2026', what: 'Förladdningen startar' },
-    { date: new Date(2026, 10, 19), when: '19 nov 2026', what: 'Release · PS5 & Xbox Series X|S' }
-  ];
-
-  function renderMilestones() {
-    const now = Date.now();
-    const list = $('timeline-list');
-    list.innerHTML = '';
-
-    let nextFound = false;
-    MILESTONES.forEach(ms => {
-      const passed = now >= ms.date;
-      const li = document.createElement('li');
-      let cls = passed ? 'passed' : '';
-      if (!passed && !nextFound) { cls += ' next'; nextFound = true; }
-      li.className = cls.trim();
-      const what = ms.url
-        ? '<a class="what" href="' + ms.url + '" target="_blank" rel="noopener noreferrer">' + ms.what + ' ↗</a>'
-        : '<span class="what">' + ms.what + '</span>';
-      li.innerHTML = '<span class="when">' + ms.when + '</span>' + what;
-      list.appendChild(li);
-    });
-  }
-
-  function updateProgress() {
-    const total = RELEASE - START;
-    const done = Math.min(Math.max(Date.now() - START, 0), total);
-    const pct = (done / total) * 100;
-    $('fill').style.width = pct.toFixed(2) + '%';
-    $('pct').textContent = pct.toFixed(1) + ' % av väntan avklarad sedan Trailer 1';
-  }
-
-  // Stars
-  (function makeStars() {
-    const wrap = $('stars');
-    for (let i = 0; i < 70; i++) {
-      const s = document.createElement('div');
-      s.className = 'star';
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.animationDelay = (Math.random() * 8) + 's';
-      s.style.transform = 'scale(' + (0.5 + Math.random() * 1.4) + ')';
-      wrap.appendChild(s);
+    function updateCountdown(now = Date.now()) {
+      const remaining = Math.max(0, RELEASE.getTime() - now);
+      if (remaining === 0) {
+        document.body.classList.add('is-released');
+        setText('next-title', 'Välkommen till Leonida');
+        setText('next-detail', 'Releasedatumet har passerat. Nu börjar nästa kapitel.');
+        setText('next-date', '19 november 2026');
+        setText('next-relative', 'Releasedagen är här');
+        if (tickHandle !== null) { clearInterval(tickHandle); tickHandle = null; }
+        return;
+      }
+      const totalSeconds = Math.floor(remaining / 1000);
+      setText('days', String(Math.floor(totalSeconds / 86400)));
+      setText('hours', pad(Math.floor(totalSeconds / 3600) % 24));
+      setText('minutes', pad(Math.floor(totalSeconds / 60) % 60));
+      setText('seconds', pad(totalSeconds % 60));
     }
-  })();
 
-  update();
-  updateProgress();
-  renderMilestones();
-  setInterval(update, 1000);
-  setInterval(() => { updateProgress(); renderMilestones(); }, 60000);
-</script>
+    function updateProgress(now = Date.now()) {
+      const percentage = Math.min(100, Math.max(0, (now - START.getTime()) / (RELEASE.getTime() - START.getTime()) * 100));
+      const rounded = percentage.toFixed(1);
+      $('progress-fill').style.width = `${percentage}%`;
+      setText('progress-value', `${rounded.replace('.', ',')} %`);
+      $('progressbar').setAttribute('aria-valuenow', rounded);
+    }
+
+    function renderMilestones(now = Date.now()) {
+      const list = $('timeline-list');
+      const fragment = document.createDocumentFragment();
+      const nextIndex = MILESTONES.findIndex(item => item.date.getTime() > now);
+      MILESTONES.forEach((item, index) => {
+        const passed = item.date.getTime() <= now;
+        const li = document.createElement('li');
+        li.className = `timeline-item${passed ? ' passed' : ''}${index === nextIndex ? ' next' : ''}`;
+        const event = document.createElement(item.url ? 'a' : 'div');
+        event.className = 'event';
+        if (item.url) { event.href = item.url; event.target = '_blank'; event.rel = 'noopener noreferrer'; }
+        const top = document.createElement('span'); top.className = 'event-top';
+        const date = document.createElement('span'); date.className = 'event-date'; date.textContent = item.when;
+        const status = document.createElement('span'); status.className = 'event-status'; status.textContent = index === nextIndex ? 'Nästa' : passed ? 'Passerad' : 'Kommande';
+        top.append(date, status);
+        const title = document.createElement('span'); title.className = 'event-name'; title.textContent = item.title;
+        if (item.url) { const arrow = document.createElement('span'); arrow.className = 'external-arrow'; arrow.textContent = '↗'; arrow.setAttribute('aria-hidden', 'true'); title.appendChild(arrow); }
+        const detail = document.createElement('span'); detail.className = 'event-detail'; detail.textContent = item.detail;
+        event.append(top, title, detail); li.appendChild(event); fragment.appendChild(li);
+      });
+      list.replaceChildren(fragment);
+    }
+
+    function updateMilestoneCard(now = Date.now()) {
+      const next = MILESTONES.find(item => item.date.getTime() > now);
+      if (!next) return;
+      setText('next-title', next.title);
+      setText('next-detail', next.detail);
+      setText('next-date', next.when);
+      const days = Math.ceil((next.date.getTime() - now) / 86400000);
+      setText('next-relative', days <= 1 ? 'Mindre än ett dygn kvar' : `${days} dagar kvar`);
+    }
+
+    function refresh() {
+      const now = Date.now();
+      updateCountdown(now);
+      const localDay = new Date(now).toDateString();
+      if (localDay !== lastMilestoneDay) {
+        updateProgress(now);
+        renderMilestones(now);
+        updateMilestoneCard(now);
+        lastMilestoneDay = localDay;
+      }
+    }
+
+    // Pausa onödiga sekunduppdateringar när fliken ligger i bakgrunden.
+    function syncTimer() {
+      if (tickHandle !== null) { clearInterval(tickHandle); tickHandle = null; }
+      refresh();
+      if (!document.hidden && Date.now() < RELEASE.getTime()) {
+        tickHandle = setInterval(() => {
+          updateCountdown();
+          // Uppdatera framsteg och milstolpar var minut; om sidan hålls öppen över midnatt.
+          const newDay = new Date().toDateString();
+          if (newDay !== lastMilestoneDay) refresh();
+        }, 1000);
+      }
+    }
+
+    (function makeStars() {
+      const wrap = $('stars');
+      const fragment = document.createDocumentFragment();
+      let seed = 9328;
+      const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
+      for (let i = 0; i < 54; i++) {
+        const star = document.createElement('i'); star.className = 'star';
+        star.style.left = `${random() * 100}%`;
+        star.style.top = `${random() * 78}%`;
+        star.style.animationDelay = `-${random() * 7}s`;
+        star.style.transform = `scale(${.55 + random() * .8})`;
+        fragment.appendChild(star);
+      }
+      wrap.appendChild(fragment);
+    })();
+
+    const zoneName = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (zoneName) $('timezone-note').textContent = `Midnatt i din enhets tidszon (${zoneName.replaceAll('_', ' ')}). Butikens region kan ha en annan upplåsningstid.`;
+    document.addEventListener('visibilitychange', syncTimer);
+    syncTimer();
+  </script>
 </body>
 </html>
